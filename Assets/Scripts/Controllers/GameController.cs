@@ -4,6 +4,6 @@ namespace DollMakeup.Controllers
 {
     public class GameController : MonoBehaviour
     {
-        
+        public DollController DollController;
     }
 }

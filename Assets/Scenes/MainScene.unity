@@ -204,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 127388462}
   - component: {fileID: 127388463}
+  - component: {fileID: 127388464}
   m_Layer: 0
   m_Name: Doll
   m_TagString: Untagged
@@ -220,7 +221,7 @@ Transform:
   m_GameObject: {fileID: 127388461}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.097, y: 1.422, z: 0}
+  m_LocalPosition: {x: 0.097, y: 1.453, z: 0}
   m_LocalScale: {x: 0.4677531, y: 0.4677531, z: 0.4677531}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -285,6 +286,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &127388464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127388461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f32a7f42261e421a9b27b560b4bb004c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.Controllers.DollController
+  FaceSprite: {fileID: 1429662452}
+  FaceCleanSprite: {fileID: 970002293}
 --- !u!1 &128202218
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 423, y: 242}
+  m_AnchoredPosition: {x: 412, y: 242}
   m_SizeDelta: {x: 305, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &263504639
@@ -2439,7 +2454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -423, y: 242}
+  m_AnchoredPosition: {x: -412, y: 242}
   m_SizeDelta: {x: 305, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1702038809
@@ -2631,6 +2646,7 @@ GameObject:
   - component: {fileID: 1780721632}
   - component: {fileID: 1780721631}
   - component: {fileID: 1780721634}
+  - component: {fileID: 1780721635}
   m_Layer: 5
   m_Name: Cream
   m_TagString: Untagged
@@ -2655,7 +2671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -406, y: 441.44214}
+  m_AnchoredPosition: {x: -395, y: 441.44214}
   m_SizeDelta: {x: 136.9733, y: 327.9906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1780721631
@@ -2754,7 +2770,97 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.Cream
   CreamButton: {fileID: 1780721631}
   CreamImage: {fileID: 1780721632}
+  Text: {fileID: 1285778815}
   CreamTool: {fileID: 211001649}
+--- !u!114 &1780721635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780721629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8d2b27d7b44c3993728c2fb7c1a56d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.Tools.MovableTool
+--- !u!1 &1802987175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1802987177}
+  - component: {fileID: 1802987176}
+  m_Layer: 0
+  m_Name: GameModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1802987176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802987175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938ac0bc45624103ad9d192bab033d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.Model.GameModel
+  GameController: {fileID: 1944068717}
+--- !u!4 &1802987177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802987175}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1835061701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1835061702}
+  m_Layer: 0
+  m_Name: Controllers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1835061702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835061701}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.10994, y: 1.6163, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1944068718}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1883685907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2922,6 +3028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e580b6de3e14afea310af75a2a7749c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.Controllers.GameController
+  DollController: {fileID: 127388464}
 --- !u!4 &1944068718
 Transform:
   m_ObjectHideFlags: 0
@@ -2935,7 +3042,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1835061702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1986627214
 GameObject:
@@ -3072,6 +3179,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 303844090}
     m_Modifications:
+    - target: {fileID: 822143755898852406, guid: 326812513b4e6184e8cac68e9f57c925, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3504797701863737507, guid: 326812513b4e6184e8cac68e9f57c925, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.276
@@ -3131,7 +3242,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 303844090}
-  - {fileID: 1944068718}
-  - {fileID: 1582424076}
   - {fileID: 414870136}
+  - {fileID: 303844090}
+  - {fileID: 1582424076}
+  - {fileID: 1835061702}
+  - {fileID: 1802987177}
