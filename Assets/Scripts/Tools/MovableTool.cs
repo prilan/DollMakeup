@@ -11,7 +11,7 @@ namespace DollMakeup.Tools
 
         public void StartDrag(GameObject spriteToMove, Vector2 positionDelta = new Vector2())
         {
-            Debug.Log("StartDrag");
+            Debug.Log("StartDrag positionDelta = " + positionDelta);
             
             IsOn = true;
             SpriteToMove = spriteToMove;

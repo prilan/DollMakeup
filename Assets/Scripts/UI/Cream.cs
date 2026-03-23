@@ -13,23 +13,27 @@ namespace DollMakeup.UI
         [SerializeField] private TextMeshProUGUI Text;
         [SerializeField] private GameObject CreamTool;
 
+        private Vector2 CreamImageWorldPosition;
         private Vector2 StartPosition;
         private Vector2 PositionDelta;
         private MovableTool CreamMove;
 
         private void Start()
         {
-            StartPosition = ((Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(CreamImage.transform.position) +
-                             AppModel.Instance.FacePosition) / 2;
-            PositionDelta = StartPosition - (Vector2)CreamTool.transform.position; 
+            CreamImageWorldPosition = AppModel.Instance.Camera.ScreenToWorldPoint(CreamImage.transform.position);
+            StartPosition = (CreamImageWorldPosition + AppModel.Instance.FacePosition) / 2;
+            PositionDelta = StartPosition - CreamImageWorldPosition; 
             CreamMove = GetComponent<MovableTool>();
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             OnCreamClicked();
-            
-            CreamMove.StartDrag(CreamTool, PositionDelta);
+
+            var clickDelta = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position) -
+                             CreamImageWorldPosition;
+            Debug.Log("OnPointerDown clickDelta = " + clickDelta);
+            CreamMove.StartDrag(CreamTool, PositionDelta - clickDelta);
         }
         
         private void OnCreamClicked()
