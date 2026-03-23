@@ -24,9 +24,19 @@ namespace DollMakeup.Controllers
             }
         }
 
+        public void OnSpongeClicked()
+        {
+            SpongeApplied();
+        }
+
         private void CreamApplied()
         {
             FaceCleanSprite.gameObject.SetActive(true);
+        }
+
+        private void SpongeApplied()
+        {
+            FaceCleanSprite.gameObject.SetActive(false);
         }
     }
 }

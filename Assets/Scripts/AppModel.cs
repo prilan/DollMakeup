@@ -10,5 +10,10 @@ namespace DollMakeup
         {
             GameModel.Instance.GameController.DollController.OnCreamEndDrag(position);
         }
+
+        public void OnSpongeClicked()
+        {
+            GameModel.Instance.GameController.DollController.OnSpongeClicked();
+        }
     }
 }
