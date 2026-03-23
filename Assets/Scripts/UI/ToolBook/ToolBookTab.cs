@@ -10,17 +10,13 @@ namespace DollMakeup.UI.ToolBook
         [SerializeField] private Image ActiveImage;
         [SerializeField] private Image InactiveImage;
 
+        public Action OnTabActiveChanged = () => { };
+
         private bool IsActive;
 
         private void Start()
         {
-            Debug.Log("ToolBookTab Start");
             TabButton.onClick.AddListener(OnTabClicked);
-        }
-
-        private void OnDestroy()
-        {
-            
         }
 
         public void SetActive(bool isActive)
@@ -28,11 +24,16 @@ namespace DollMakeup.UI.ToolBook
             IsActive = isActive;
             ActiveImage.gameObject.SetActive(isActive);
             InactiveImage.gameObject.SetActive(!isActive);
+            
+            if (isActive)
+                OnTabActiveChanged?.Invoke();
         }
         
         private void OnTabClicked()
         {
-            Debug.Log("ToolBookTab OnTabClicked");
+            if (IsActive)
+                return;
+            
             SetActive(!IsActive);
         }
     }
