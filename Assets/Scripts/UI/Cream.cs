@@ -14,12 +14,14 @@ namespace DollMakeup.UI
         [SerializeField] private GameObject CreamTool;
 
         private Vector2 StartPosition;
+        private Vector2 PositionDelta;
         private MovableTool CreamMove;
 
         private void Start()
         {
             StartPosition = ((Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(CreamImage.transform.position) +
                              AppModel.Instance.FacePosition) / 2;
+            PositionDelta = StartPosition - (Vector2)CreamTool.transform.position; 
             CreamMove = GetComponent<MovableTool>();
         }
 
@@ -27,7 +29,7 @@ namespace DollMakeup.UI
         {
             OnCreamClicked();
             
-            CreamMove.StartDrag(CreamTool);
+            CreamMove.StartDrag(CreamTool, PositionDelta);
         }
         
         private void OnCreamClicked()

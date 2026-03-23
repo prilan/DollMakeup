@@ -7,13 +7,15 @@ namespace DollMakeup.Tools
     {
         private bool IsOn;
         private GameObject SpriteToMove;
+        private Vector2 PositionDelta;
 
-        public void StartDrag(GameObject spriteToMove)
+        public void StartDrag(GameObject spriteToMove, Vector2 positionDelta = new Vector2())
         {
             Debug.Log("StartDrag");
             
             IsOn = true;
             SpriteToMove = spriteToMove;
+            PositionDelta = positionDelta;
         }
 
         public void EndDrag()
@@ -34,7 +36,7 @@ namespace DollMakeup.Tools
                     mousePos.z = 0;
                     //Debug.Log("mousePos = " + mousePos);
 
-                    SpriteToMove.transform.position = mousePos;
+                    SpriteToMove.transform.position = mousePos + (Vector3)PositionDelta;
             }
         }
     }
