@@ -7,13 +7,15 @@ namespace DollMakeup.Tools
     {
         private bool IsOn;
         private GameObject SpriteToMove;
+        private Vector2 PositionDelta;
 
-        public void StartDrag(GameObject spriteToMove)
+        public void StartDrag(GameObject spriteToMove, Vector2 positionDelta = new Vector2())
         {
-            Debug.Log("StartDrag");
+            Debug.Log("StartDrag positionDelta = " + positionDelta);
             
             IsOn = true;
             SpriteToMove = spriteToMove;
+            PositionDelta = positionDelta;
         }
 
         public void EndDrag()
@@ -26,18 +28,12 @@ namespace DollMakeup.Tools
         
         public void OnDrag(PointerEventData eventData)
         {
-            //Debug.Log("Drag position = " + eventData.position);
-            
             if (IsOn)
             {
-                if (Camera.main != null)
-                {
-                    var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    var mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
                     mousePos.z = 0;
-                    //Debug.Log("mousePos = " + mousePos);
 
-                    SpriteToMove.transform.position = mousePos;
-                }
+                    SpriteToMove.transform.position = mousePos + (Vector3)PositionDelta;
             }
         }
     }

@@ -7,20 +7,18 @@ namespace DollMakeup.Controllers
         [SerializeField] public SpriteRenderer FaceSprite;
         [SerializeField] public SpriteRenderer FaceCleanSprite;
 
+        public Vector2 FacePosition => FaceSprite.transform.position;
+
         public void OnCreamEndDrag(Vector2 position)
         {
-            if (Camera.main != null)
+            Debug.Log("FacePosition = " + FacePosition);
+            
+            if (position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 2
+                && position.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
+                && position.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
+                && position.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)
             {
-                var mousePos = Camera.main.ScreenToWorldPoint(position);
-                
-                if (mousePos.x > FaceSprite.transform.position.x - FaceSprite.size.x / 2
-                    && mousePos.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
-                    && mousePos.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
-                    && mousePos.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)
-                {
-                    Debug.Log("good position");
-                    CreamApplied();
-                }
+                CreamApplied();
             }
         }
 
