@@ -13,10 +13,13 @@ namespace DollMakeup.UI
         [SerializeField] private TextMeshProUGUI Text;
         [SerializeField] private GameObject CreamTool;
 
+        private Vector2 StartPosition;
         private MovableTool CreamMove;
 
         private void Start()
         {
+            StartPosition = ((Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(CreamImage.transform.position) +
+                             AppModel.Instance.FacePosition) / 2;
             CreamMove = GetComponent<MovableTool>();
         }
 
@@ -33,6 +36,7 @@ namespace DollMakeup.UI
             Text.enabled = false;
             
             CreamTool.SetActive(true);
+            CreamTool.transform.position = StartPosition;
         }
 
         public void OnPointerUp(PointerEventData eventData)

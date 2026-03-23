@@ -3163,6 +3163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e580b6de3e14afea310af75a2a7749c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.Controllers.GameController
+  Camera: {fileID: 519420031}
   DollController: {fileID: 127388464}
 --- !u!4 &1944068718
 Transform:
@@ -3315,6 +3316,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 303844090}
     m_Modifications:
     - target: {fileID: 822143755898852406, guid: 326812513b4e6184e8cac68e9f57c925, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712489912412162999, guid: 326812513b4e6184e8cac68e9f57c925, type: 3}
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}

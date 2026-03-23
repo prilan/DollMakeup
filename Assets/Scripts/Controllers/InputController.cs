@@ -8,7 +8,7 @@ namespace DollMakeup.Controllers
         {
             if (Input.GetMouseButtonDown(0))
             {
-                var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
                 
                 
                 Debug.Log("Clicked on " + Input.mousePosition);

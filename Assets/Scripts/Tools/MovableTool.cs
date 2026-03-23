@@ -30,14 +30,11 @@ namespace DollMakeup.Tools
             
             if (IsOn)
             {
-                if (Camera.main != null)
-                {
-                    var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    var mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
                     mousePos.z = 0;
                     //Debug.Log("mousePos = " + mousePos);
 
                     SpriteToMove.transform.position = mousePos;
-                }
             }
         }
     }
