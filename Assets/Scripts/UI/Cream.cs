@@ -48,8 +48,9 @@ namespace DollMakeup.UI
         public void OnPointerUp(PointerEventData eventData)
         {
             CreamMove.EndDrag();
-            
-            AppModel.Instance.OnCreamEndDrag(eventData.position);
+            var position = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position) + PositionDelta;
+            Debug.Log("OnPointerUp position = " + position);
+            AppModel.Instance.OnCreamEndDrag(position);
             
             CreamImage.enabled = true;
             Text.enabled = true;

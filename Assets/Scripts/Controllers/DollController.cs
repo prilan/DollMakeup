@@ -11,14 +11,13 @@ namespace DollMakeup.Controllers
 
         public void OnCreamEndDrag(Vector2 position)
         {
-            var mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(position);
+            Debug.Log("FacePosition = " + FacePosition);
             
-            if (mousePos.x > FaceSprite.transform.position.x - FaceSprite.size.x / 2
-                && mousePos.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
-                && mousePos.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
-                && mousePos.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)
+            if (position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 2
+                && position.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
+                && position.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
+                && position.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)
             {
-                Debug.Log("good position");
                 CreamApplied();
             }
         }

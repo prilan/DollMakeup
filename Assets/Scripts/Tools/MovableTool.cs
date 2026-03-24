@@ -28,13 +28,10 @@ namespace DollMakeup.Tools
         
         public void OnDrag(PointerEventData eventData)
         {
-            //Debug.Log("Drag position = " + eventData.position);
-            
             if (IsOn)
             {
                     var mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
                     mousePos.z = 0;
-                    //Debug.Log("mousePos = " + mousePos);
 
                     SpriteToMove.transform.position = mousePos + (Vector3)PositionDelta;
             }
