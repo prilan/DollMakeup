@@ -32,19 +32,17 @@ namespace DollMakeup.Tools
         {
             if (IsOn)
             {
-                Vector3 mousePos;
-                if (IsUI)
-                {
-                    mousePos = Input.mousePosition;
-                }
-                else
-                {
-                    mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
-                    mousePos.z = 0;
-                }
+                var mousePos = GetMousePosition(Input.mousePosition);
 
                 SpriteToMove.transform.position = mousePos + (Vector3) PositionDelta;
             }
+        }
+
+        protected virtual Vector3 GetMousePosition(Vector3 position)
+        {
+            var mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            return mousePos;
         }
     }
 }

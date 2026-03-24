@@ -12,12 +12,12 @@ namespace DollMakeup.UI
         [SerializeField] private GameObject BrushTool;
         
         private Vector2 BrushImagePosition;
-        private MovableTool BrushMove;
+        private UIMovableTool BrushMove;
 
         private void Start()
         {
             BrushImagePosition = BrushImage.transform.position;
-            BrushMove = GetComponent<MovableTool>();
+            BrushMove = GetComponent<UIMovableTool>();
         }
 
         public void OnPointerDown(PointerEventData eventData)

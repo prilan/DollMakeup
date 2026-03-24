@@ -3063,7 +3063,7 @@ GameObject:
   - component: {fileID: 1207711782}
   - component: {fileID: 1207711781}
   - component: {fileID: 1207711784}
-  - component: {fileID: 1207711783}
+  - component: {fileID: 1207711785}
   m_Layer: 5
   m_Name: Brush
   m_TagString: Untagged
@@ -3128,18 +3128,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207711779}
   m_CullTransparentMesh: 1
---- !u!114 &1207711783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207711779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be8d2b27d7b44c3993728c2fb7c1a56d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.Tools.MovableTool
 --- !u!114 &1207711784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3154,6 +3142,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.EyeBrush
   BrushImage: {fileID: 1207711781}
   BrushTool: {fileID: 45706949}
+--- !u!114 &1207711785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207711779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3474b13f554d7f9434c43e8cd3f51c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.Tools.UIMovableTool
 --- !u!1 &1214725078
 GameObject:
   m_ObjectHideFlags: 0
