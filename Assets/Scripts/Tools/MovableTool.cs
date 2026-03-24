@@ -6,13 +6,15 @@ namespace DollMakeup.Tools
     public class MovableTool : MonoBehaviour, IDragHandler
     {
         private bool IsOn;
+        private bool IsUI;
         private GameObject SpriteToMove;
         private Vector2 PositionDelta;
 
-        public void StartDrag(GameObject spriteToMove, Vector2 positionDelta = new Vector2())
+        public void StartDrag(GameObject spriteToMove, bool isUI, Vector2 positionDelta = new Vector2())
         {
             Debug.Log("StartDrag positionDelta = " + positionDelta);
-            
+
+            IsUI = isUI;
             IsOn = true;
             SpriteToMove = spriteToMove;
             PositionDelta = positionDelta;
@@ -30,10 +32,18 @@ namespace DollMakeup.Tools
         {
             if (IsOn)
             {
-                    var mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 mousePos;
+                if (IsUI)
+                {
+                    mousePos = Input.mousePosition;
+                }
+                else
+                {
+                    mousePos = AppModel.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
                     mousePos.z = 0;
+                }
 
-                    SpriteToMove.transform.position = mousePos + (Vector3)PositionDelta;
+                SpriteToMove.transform.position = mousePos + (Vector3) PositionDelta;
             }
         }
     }
