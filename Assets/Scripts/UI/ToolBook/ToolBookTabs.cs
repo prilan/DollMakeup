@@ -1,23 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DollMakeup.UI.ToolBook
 {
     public class ToolBookTabs : MonoBehaviour
     {
-
         [SerializeField] private List<ToolBookTab> Tabs;
+        
+        public Action<int> OnTabActiveChanged = (index) => { };
 
         private void Start()
         {
             for (var i = 0; i < Tabs.Count; i++)
             {
                 int index = i;
-                Tabs[i].OnTabActiveChanged += () => OnTabActiveChanged(index);
+                Tabs[i].OnTabActiveChanged += () => TabActiveChanged(index);
             }
         }
 
-        private void OnTabActiveChanged(int index)
+        private void TabActiveChanged(int index)
         {
             for (var i = 0; i < Tabs.Count; i++)
             {
@@ -26,6 +28,8 @@ namespace DollMakeup.UI.ToolBook
                     Tabs[i].SetActive(false);
                 }
             }
+            
+            OnTabActiveChanged?.Invoke(index);
         }
     }
 }
