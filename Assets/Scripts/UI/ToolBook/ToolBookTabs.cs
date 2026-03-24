@@ -14,7 +14,7 @@ namespace DollMakeup.UI.ToolBook
         {
             for (var i = 0; i < Tabs.Count; i++)
             {
-                int index = i;
+                var index = i;
                 Tabs[i].OnTabActiveChanged += () => TabActiveChanged(index);
             }
         }

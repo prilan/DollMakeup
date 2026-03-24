@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using DollMakeup.Model;
 using DollMakeup.Tools;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,8 +12,15 @@ namespace DollMakeup.UI
         [SerializeField] private Image BrushImage;
         [SerializeField] private GameObject BrushTool;
         
+        private const float BRUSH_LENGTH = 220;
+        private const float BRUSH_TARGET_SHIFT = 50;
+        private const float BRUSH_ACTIVATE_MOVE_DURATION_SEC = 0.4f;
+        private const float BRUSH_IN_COLOR_SHIFT = 30;
+
         private Vector2 BrushImagePosition;
         private UIMovableTool BrushMove;
+        
+        private Sequence brushAnimation;
 
         private void Start()
         {
@@ -20,8 +28,17 @@ namespace DollMakeup.UI
             BrushMove = GetComponent<UIMovableTool>();
         }
 
+        public void BrushActivate(Vector3 colorPosition)
+        {
+            OnBrushClicked();
+
+            StartBrushAnimation(colorPosition);
+        }
+        
         public void OnPointerDown(PointerEventData eventData)
         {
+            return; // TODO
+            
             OnBrushClicked();
 
             StartDrag(eventData);
@@ -36,6 +53,43 @@ namespace DollMakeup.UI
             BrushTool.transform.eulerAngles = Vector3.zero;
         }
         
+        private void StartBrushAnimation(Vector3 colorPosition)
+        {
+            Debug.Log("colorPosition = " + colorPosition);
+
+            brushAnimation = DOTween.Sequence();
+            brushAnimation.OnKill(() => brushAnimation = null);
+
+            var targetPosition = colorPosition + new Vector3(BRUSH_TARGET_SHIFT, -BRUSH_LENGTH, 0);
+
+            Vector3 facePosition = WorldToCanvasPosition(AppModel.Instance.FacePosition, AppModel.Instance.Canvas);
+            Debug.Log("facePosition = " + facePosition);
+            var centerPosition = (facePosition + colorPosition) / 2;
+            Debug.Log("centerPosition = " + centerPosition);
+
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition, BRUSH_ACTIVATE_MOVE_DURATION_SEC));
+            brushAnimation.Join(BrushTool.transform.DORotate(new Vector3(0, 0, 15), BRUSH_ACTIVATE_MOVE_DURATION_SEC));
+
+            //brushAnimation.AppendInterval(0.05f);
+
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BRUSH_IN_COLOR_SHIFT, 0, 0), 0.15f).SetEase(Ease.OutSine));
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(-BRUSH_IN_COLOR_SHIFT, 0, 0), 0.2f).SetEase(Ease.OutSine));
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BRUSH_IN_COLOR_SHIFT, 0, 0), 0.2f).SetEase(Ease.OutSine));
+
+            brushAnimation.Append(BrushTool.transform.DOMove(centerPosition, 0.5f).SetEase(Ease.InOutSine));
+
+            // TODO
+            //brushAnimation.OnComplete(() => StartDrag(eventData));
+        }
+
+        private Vector2 WorldToCanvasPosition(Vector2 position, Canvas canvas)
+        {
+            Vector2 ViewPos = AppModel.Instance.Camera.WorldToViewportPoint(position);
+            //ViewPos -= new Vector2(0.5f, 0.5f);
+            var CanvasSize = canvas.gameObject.GetComponent<RectTransform>().sizeDelta;
+            return new Vector2(ViewPos.x * CanvasSize.x, ViewPos.y * CanvasSize.y);
+        }
+
         private void StartDrag(PointerEventData eventData)
         {
             BrushMove.StartDrag(BrushTool, true);

@@ -8,6 +8,7 @@ namespace DollMakeup
     {
         public Vector2 FacePosition => GameModel.Instance.GameController.DollController.FacePosition;
         public Camera Camera => GameModel.Instance.GameController.Camera;
+        public Canvas Canvas => GameModel.Instance.GameController.Canvas;
 
         public void OnCreamEndDrag(Vector2 position)
         {
