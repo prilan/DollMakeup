@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace DollMakeup.UI
 {
-    public class EyeBrush : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class EyeBrush : MonoBehaviour, IPointerDownHandler, IPointerUpHandler//, IDragHandler
     {
         [SerializeField] private Image BrushImage;
         [SerializeField] private GameObject BrushTool;
@@ -21,6 +21,7 @@ namespace DollMakeup.UI
         private UIMovableTool BrushMove;
         
         private Sequence brushAnimation;
+        private bool IsMovable;
 
         private void Start()
         {
@@ -37,11 +38,7 @@ namespace DollMakeup.UI
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            return; // TODO
-            
-            OnBrushClicked();
 
-            StartDrag(eventData);
         }
         
         private void OnBrushClicked()
@@ -78,21 +75,33 @@ namespace DollMakeup.UI
 
             brushAnimation.Append(BrushTool.transform.DOMove(centerPosition, 0.5f).SetEase(Ease.InOutSine));
 
-            // TODO
-            //brushAnimation.OnComplete(() => StartDrag(eventData));
+            brushAnimation.OnComplete(() =>
+            {
+                IsMovable = true;
+            });
         }
 
         private Vector2 WorldToCanvasPosition(Vector2 position, Canvas canvas)
         {
             Vector2 ViewPos = AppModel.Instance.Camera.WorldToViewportPoint(position);
-            //ViewPos -= new Vector2(0.5f, 0.5f);
             var CanvasSize = canvas.gameObject.GetComponent<RectTransform>().sizeDelta;
             return new Vector2(ViewPos.x * CanvasSize.x, ViewPos.y * CanvasSize.y);
         }
 
+        public void OnDrag(PointerEventData eventData)
+        {
+            Debug.Log("EyeBrush OnDrag, IsMovable = " + IsMovable);
+
+            if (!IsMovable)
+                return;
+            
+            StartDrag(eventData);
+        }
+        
         private void StartDrag(PointerEventData eventData)
         {
             BrushMove.StartDrag(BrushTool, true);
+            BrushMove.OnDrag(eventData);
         }
 
         public void OnPointerUp(PointerEventData eventData)

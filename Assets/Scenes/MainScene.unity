@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 71126403}
   - component: {fileID: 71126402}
   - component: {fileID: 71126404}
+  - component: {fileID: 71126405}
   m_Layer: 5
   m_Name: Makeup6
   m_TagString: Untagged
@@ -389,6 +390,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &71126405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71126400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &101049727
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +805,7 @@ GameObject:
   - component: {fileID: 145078849}
   - component: {fileID: 145078848}
   - component: {fileID: 145078850}
+  - component: {fileID: 145078851}
   m_Layer: 5
   m_Name: Makeup3
   m_TagString: Untagged
@@ -899,6 +914,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &145078851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145078846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &159706572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,6 +1267,7 @@ GameObject:
   - component: {fileID: 283032863}
   - component: {fileID: 283032862}
   - component: {fileID: 283032864}
+  - component: {fileID: 283032865}
   m_Layer: 5
   m_Name: Makeup8
   m_TagString: Untagged
@@ -1347,6 +1376,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &283032865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283032860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &303844089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,6 +2098,7 @@ GameObject:
   - component: {fileID: 623897024}
   - component: {fileID: 623897023}
   - component: {fileID: 623897025}
+  - component: {fileID: 623897026}
   m_Layer: 5
   m_Name: Makeup2
   m_TagString: Untagged
@@ -2164,6 +2207,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &623897026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623897021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &636503044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,6 +2532,7 @@ GameObject:
   - component: {fileID: 780372366}
   - component: {fileID: 780372365}
   - component: {fileID: 780372367}
+  - component: {fileID: 780372368}
   m_Layer: 5
   m_Name: Makeup7
   m_TagString: Untagged
@@ -2584,6 +2641,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &780372368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780372363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &813550461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,6 +2666,7 @@ GameObject:
   - component: {fileID: 813550464}
   - component: {fileID: 813550463}
   - component: {fileID: 813550465}
+  - component: {fileID: 813550466}
   m_Layer: 5
   m_Name: Makeup4
   m_TagString: Untagged
@@ -2704,6 +2775,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &813550466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813550461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &817904578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2716,6 +2800,7 @@ GameObject:
   - component: {fileID: 817904581}
   - component: {fileID: 817904580}
   - component: {fileID: 817904582}
+  - component: {fileID: 817904583}
   m_Layer: 5
   m_Name: Makeup9
   m_TagString: Untagged
@@ -2824,6 +2909,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &817904583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817904578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &853477006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2999,6 +3097,16 @@ MonoBehaviour:
   - {fileID: 780372367}
   - {fileID: 283032864}
   - {fileID: 817904582}
+  ColorPicks:
+  - {fileID: 1253280095}
+  - {fileID: 623897026}
+  - {fileID: 145078851}
+  - {fileID: 813550466}
+  - {fileID: 890403059}
+  - {fileID: 71126405}
+  - {fileID: 780372368}
+  - {fileID: 283032865}
+  - {fileID: 817904583}
   Brush: {fileID: 1207711784}
 --- !u!1 &890403054
 GameObject:
@@ -3012,6 +3120,7 @@ GameObject:
   - component: {fileID: 890403057}
   - component: {fileID: 890403056}
   - component: {fileID: 890403058}
+  - component: {fileID: 890403059}
   m_Layer: 5
   m_Name: Makeup5
   m_TagString: Untagged
@@ -3120,6 +3229,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &890403059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890403054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &914484671
 GameObject:
   m_ObjectHideFlags: 0
@@ -3843,6 +3965,7 @@ GameObject:
   - component: {fileID: 1253280093}
   - component: {fileID: 1253280092}
   - component: {fileID: 1253280094}
+  - component: {fileID: 1253280095}
   m_Layer: 5
   m_Name: Makeup1
   m_TagString: Untagged
@@ -3951,6 +4074,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1253280095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253280090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb347131dd5945d1bee81ed538d3b4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.ToolBook.ColorPick
+  Brush: {fileID: 1207711784}
 --- !u!1 &1285778811
 GameObject:
   m_ObjectHideFlags: 0
