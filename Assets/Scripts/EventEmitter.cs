@@ -5,21 +5,21 @@ namespace DollMakeup
 {
     public class EventEmitter  : AbstractSingleton<EventEmitter>
     {
-        private event Action<string> clickedOnItem = (item) => { };
+        private event Action creamApplyComplete = () => { };
 
         /*****************************************************************************************/
         
-        public static void OnClickedOnItem(string item)
+        public static void OnCreamApplyComplete()
         {
-            Instance.clickedOnItem(item);
+            Instance.creamApplyComplete();
         }
         
         /*****************************************************************************************/
         
-        public static event Action<string> ClickedOnItem
+        public static event Action CreamApplyComplete
         {
-            add { Instance.clickedOnItem += value; }
-            remove { Instance.clickedOnItem -= value; }
+            add => Instance.creamApplyComplete += value;
+            remove => Instance.creamApplyComplete -= value;
         }
     }
 }

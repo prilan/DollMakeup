@@ -14,7 +14,8 @@ namespace DollMakeup.UI
         [SerializeField] private TextMeshProUGUI Text;
         [SerializeField] private GameObject CreamTool;
 
-        private const float CREAM_APPEAR_TIME_SEC = 0.2f;
+        private const float CREAM_APPEAR_DURATION_SEC = 0.15f;
+        private const float CREAM_RETURN_DURATION_SEC = 0.2f;
         
         private Vector2 CreamImageWorldPosition;
         private Vector2 StartPosition;
@@ -29,6 +30,13 @@ namespace DollMakeup.UI
             StartPosition = CreamImageWorldPosition + (AppModel.Instance.FacePosition - CreamImageWorldPosition) / 3;
             PositionDelta = StartPosition - CreamImageWorldPosition; 
             CreamMove = GetComponent<MovableTool>();
+            
+            EventEmitter.CreamApplyComplete += OnCreamApplyComplete;
+        }
+
+        private void OnDestroy()
+        {
+            EventEmitter.CreamApplyComplete -= OnCreamApplyComplete;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -53,8 +61,8 @@ namespace DollMakeup.UI
             creamAnimation = DOTween.Sequence();
             creamAnimation.OnKill(() => creamAnimation = null);
 
-            creamAnimation.Append(CreamTool.transform.DOMove(StartPosition, CREAM_APPEAR_TIME_SEC));
-            creamAnimation.Join(CreamTool.transform.DORotate(new Vector3(0, 0, -20), CREAM_APPEAR_TIME_SEC));
+            creamAnimation.Append(CreamTool.transform.DOMove(StartPosition, CREAM_APPEAR_DURATION_SEC));
+            creamAnimation.Join(CreamTool.transform.DORotate(new Vector3(0, 0, -20), CREAM_APPEAR_DURATION_SEC));
             creamAnimation.OnComplete(() => StartDrag(eventData));
         }
 
@@ -72,11 +80,22 @@ namespace DollMakeup.UI
             var position = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position) + PositionDelta;
             Debug.Log("OnPointerUp position = " + position);
             AppModel.Instance.OnCreamEndDrag(position);
+        }
+        
+        private void OnCreamApplyComplete()
+        {
+            creamAnimation = DOTween.Sequence();
+            creamAnimation.OnKill(() => creamAnimation = null);
             
-            CreamImage.enabled = true;
-            Text.enabled = true;
-            
-            CreamTool.SetActive(false);
+            creamAnimation.Append(CreamTool.transform.DOMove(CreamImageWorldPosition, CREAM_RETURN_DURATION_SEC));
+            creamAnimation.Join(CreamTool.transform.DORotate(new Vector3(0, 0, 0), CREAM_RETURN_DURATION_SEC));
+            creamAnimation.OnComplete(() =>
+            {
+                CreamImage.enabled = true;
+                Text.enabled = true;
+
+                CreamTool.SetActive(false);
+            });
         }
     }
 }
