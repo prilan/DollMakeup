@@ -1,4 +1,5 @@
-﻿using DollMakeup.Tools;
+﻿using DG.Tweening;
+using DollMakeup.Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,27 +14,36 @@ namespace DollMakeup.UI
         [SerializeField] private TextMeshProUGUI Text;
         [SerializeField] private GameObject CreamTool;
 
+        private const float CREAM_APPEAR_DURATION_SEC = 0.15f;
+        private const float CREAM_RETURN_DURATION_SEC = 0.2f;
+        
         private Vector2 CreamImageWorldPosition;
         private Vector2 StartPosition;
         private Vector2 PositionDelta;
         private MovableTool CreamMove;
 
+        private Sequence creamAnimation;
+
         private void Start()
         {
             CreamImageWorldPosition = AppModel.Instance.Camera.ScreenToWorldPoint(CreamImage.transform.position);
-            StartPosition = (CreamImageWorldPosition + AppModel.Instance.FacePosition) / 2;
+            StartPosition = CreamImageWorldPosition + (AppModel.Instance.FacePosition - CreamImageWorldPosition) / 3;
             PositionDelta = StartPosition - CreamImageWorldPosition; 
             CreamMove = GetComponent<MovableTool>();
+            
+            EventEmitter.CreamApplyComplete += OnCreamApplyComplete;
+        }
+
+        private void OnDestroy()
+        {
+            EventEmitter.CreamApplyComplete -= OnCreamApplyComplete;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             OnCreamClicked();
 
-            var clickDelta = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position) -
-                             CreamImageWorldPosition;
-            Debug.Log("OnPointerDown clickDelta = " + clickDelta);
-            CreamMove.StartDrag(CreamTool, PositionDelta - clickDelta);
+            StartCreamAnimation(eventData);
         }
         
         private void OnCreamClicked()
@@ -42,7 +52,26 @@ namespace DollMakeup.UI
             Text.enabled = false;
             
             CreamTool.SetActive(true);
-            CreamTool.transform.position = StartPosition;
+            CreamTool.transform.position = CreamImageWorldPosition;
+            CreamTool.transform.eulerAngles = Vector3.zero;
+        }
+
+        private void StartCreamAnimation(PointerEventData eventData)
+        {
+            creamAnimation = DOTween.Sequence();
+            creamAnimation.OnKill(() => creamAnimation = null);
+
+            creamAnimation.Append(CreamTool.transform.DOMove(StartPosition, CREAM_APPEAR_DURATION_SEC));
+            creamAnimation.Join(CreamTool.transform.DORotate(new Vector3(0, 0, -20), CREAM_APPEAR_DURATION_SEC));
+            creamAnimation.OnComplete(() => StartDrag(eventData));
+        }
+
+        private void StartDrag(PointerEventData eventData)
+        {
+            var clickDelta = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position) -
+                             CreamImageWorldPosition;
+            Debug.Log("OnPointerDown clickDelta = " + clickDelta);
+            CreamMove.StartDrag(CreamTool, PositionDelta - clickDelta);
         }
 
         public void OnPointerUp(PointerEventData eventData)
@@ -51,11 +80,22 @@ namespace DollMakeup.UI
             var position = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position) + PositionDelta;
             Debug.Log("OnPointerUp position = " + position);
             AppModel.Instance.OnCreamEndDrag(position);
+        }
+        
+        private void OnCreamApplyComplete()
+        {
+            creamAnimation = DOTween.Sequence();
+            creamAnimation.OnKill(() => creamAnimation = null);
             
-            CreamImage.enabled = true;
-            Text.enabled = true;
-            
-            CreamTool.SetActive(false);
+            creamAnimation.Append(CreamTool.transform.DOMove(CreamImageWorldPosition, CREAM_RETURN_DURATION_SEC));
+            creamAnimation.Join(CreamTool.transform.DORotate(new Vector3(0, 0, 0), CREAM_RETURN_DURATION_SEC));
+            creamAnimation.OnComplete(() =>
+            {
+                CreamImage.enabled = true;
+                Text.enabled = true;
+
+                CreamTool.SetActive(false);
+            });
         }
     }
 }
