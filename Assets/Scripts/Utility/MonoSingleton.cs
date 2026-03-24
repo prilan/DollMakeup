@@ -12,7 +12,7 @@ namespace Utility
             {
                 if (instance != null) return instance;
 
-                instance = FindObjectOfType(typeof(T)) as T;
+                instance = FindFirstObjectByType(typeof(T)) as T;
                 if (instance != null) return instance;
 
                 var gameObject = new GameObject(typeof(T).Name);
