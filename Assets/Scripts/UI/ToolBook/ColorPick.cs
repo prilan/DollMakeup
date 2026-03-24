@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace DollMakeup.UI.ToolBook
 {
-    public class ColorPick : MonoBehaviour, IPointerDownHandler, IDragHandler
+    public class ColorPick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         [SerializeField] private EyeBrush Brush;
         
@@ -17,9 +17,14 @@ namespace DollMakeup.UI.ToolBook
 
         public void OnDrag(PointerEventData eventData)
         {
-            Debug.Log("ColorPick OnDrag");
+            //Debug.Log("ColorPick OnDrag");
             
             Brush.OnDrag(eventData);
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            Brush.OnPointerUp(eventData);
         }
     }
 }

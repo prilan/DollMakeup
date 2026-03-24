@@ -19,6 +19,7 @@ namespace DollMakeup.UI
 
         private Vector2 BrushImagePosition;
         private UIMovableTool BrushMove;
+        private int ActiveBrushIndex;
         
         private Sequence brushAnimation;
         private bool IsMovable;
@@ -29,8 +30,10 @@ namespace DollMakeup.UI
             BrushMove = GetComponent<UIMovableTool>();
         }
 
-        public void BrushActivate(Vector3 colorPosition)
+        public void BrushActivate(Vector3 colorPosition, int index)
         {
+            ActiveBrushIndex = index;
+            
             OnBrushClicked();
 
             StartBrushAnimation(colorPosition);
@@ -90,7 +93,7 @@ namespace DollMakeup.UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            Debug.Log("EyeBrush OnDrag, IsMovable = " + IsMovable);
+            //Debug.Log("EyeBrush OnDrag, IsMovable = " + IsMovable);
 
             if (!IsMovable)
                 return;
@@ -106,7 +109,10 @@ namespace DollMakeup.UI
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            
+            BrushMove.EndDrag();
+            var position = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position);
+            Debug.Log("OnPointerUp position = " + position);
+            AppModel.Instance.OnEyeBrushEndDrag(position, ActiveBrushIndex);
         }
     }
 }

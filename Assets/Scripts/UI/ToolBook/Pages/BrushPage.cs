@@ -22,7 +22,7 @@ namespace DollMakeup.UI.ToolBook.Pages
         private void OnColorPick(int index)
         {
             var colorPosition = ColorButtons[index].transform.position;
-            Brush.BrushActivate(colorPosition);
+            Brush.BrushActivate(colorPosition, index);
         }
     }
 }
