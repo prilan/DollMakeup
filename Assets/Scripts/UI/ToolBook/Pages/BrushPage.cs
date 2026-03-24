@@ -7,21 +7,20 @@ namespace DollMakeup.UI.ToolBook.Pages
     public class BrushPage : MonoBehaviour
     {
         [SerializeField] private List<Button> ColorButtons;
+        [SerializeField] private List<ColorPick> ColorPicks;
         [SerializeField] private EyeBrush Brush;
 
         private void Start()
         {
-            for (var i = 0; i < ColorButtons.Count; i++)
+            for (var i = 0; i < ColorPicks.Count; i++)
             {
                 var index = i;
-                ColorButtons[i].onClick.AddListener(() => OnColorButtonClick(index));
+                ColorPicks[i].OnColorPick += () => OnColorPick(index);
             }
         }
 
-        private void OnColorButtonClick(int index)
+        private void OnColorPick(int index)
         {
-            Debug.Log("Color clicked: " + index);
-
             var colorPosition = ColorButtons[index].transform.position;
             Brush.BrushActivate(colorPosition);
         }
