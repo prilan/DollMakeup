@@ -13,7 +13,7 @@ namespace DollMakeup.Controllers
         [SerializeField] public List<EyeBrushSprites> EyeBrushList;
 
         private const float CREAM_APPLY_DURATION_SEC = 0.3f;
-        private const float EYE_BRUSH_APPLY_DURATION_SEC = 0.3f;
+        private const float EYE_BRUSH_APPLY_DURATION_SEC = 0.4f;
 
         public Vector2 FacePosition => FaceSprite.transform.position;
 
@@ -47,8 +47,7 @@ namespace DollMakeup.Controllers
             Debug.Log("FacePosition = " + FacePosition);
             Debug.Log("position = " + position + ", activeBrushIndex = " + activeBrushIndex);
             
-            if (/*!IsCreamApplied
-                &&*/position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 4
+            if (position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 4
                 && position.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
                 && position.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
                 && position.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)
@@ -91,12 +90,28 @@ namespace DollMakeup.Controllers
 
         private void EyeBrushApplyAnimation(int activeBrushIndex)
         {
-            foreach (var brushSprite in EyeBrushList[activeBrushIndex].BrushSprites)
+            for (var i = 0; i < EyeBrushList.Count; i++)
             {
-                brushSprite.gameObject.SetActive(true);
+                foreach (var brushSprite in EyeBrushList[i].BrushSprites)
+                {
+                    if (i == activeBrushIndex)
+                    {
+                        brushSprite.gameObject.SetActive(true);
                 
-                brushSprite.DOFade(0, 0);
-                brushSprite.DOFade(1, EYE_BRUSH_APPLY_DURATION_SEC);
+                        brushSprite.DOFade(0, 0);
+                        brushSprite.DOFade(1, EYE_BRUSH_APPLY_DURATION_SEC);
+                    }
+                    else
+                    {
+                        if (brushSprite.gameObject.activeSelf)
+                        {
+                            brushSprite.DOFade(0, EYE_BRUSH_APPLY_DURATION_SEC).OnComplete(() =>
+                            {
+                                brushSprite.gameObject.SetActive(false);
+                            });
+                        }
+                    }
+                }
             }
 
             transform.DOMove(transform.position, EYE_BRUSH_APPLY_DURATION_SEC)
