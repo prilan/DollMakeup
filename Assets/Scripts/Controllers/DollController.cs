@@ -13,7 +13,8 @@ namespace DollMakeup.Controllers
         [SerializeField] public List<EyeBrushSprites> EyeBrushList;
 
         private const float CREAM_APPLY_DURATION_SEC = 0.3f;
-        private const float EYE_BRUSH_APPLY_DURATION_SEC = 0.4f;
+        private const float EYE_BRUSH_APPLY_DURATION_SEC = 1.0f;
+        private const float EYE_BRUSH_END_DELAY_SEC = 0.4f;
 
         public Vector2 FacePosition => FaceSprite.transform.position;
 
@@ -107,7 +108,7 @@ namespace DollMakeup.Controllers
                 }
             }
 
-            transform.DOMove(transform.position, EYE_BRUSH_APPLY_DURATION_SEC)
+            transform.DOMove(transform.position, EYE_BRUSH_APPLY_DURATION_SEC + EYE_BRUSH_END_DELAY_SEC)
                 .OnComplete(EventEmitter.OnEyeBrushApplyComplete);
         }
         
