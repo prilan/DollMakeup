@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using DollMakeup.Model;
 using DollMakeup.Tools;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace DollMakeup.UI
         private const float BRUSH_TARGET_SHIFT = 50;
         private const float BRUSH_ACTIVATE_MOVE_DURATION_SEC = 0.4f;
         private const float BRUSH_IN_COLOR_SHIFT = 30;
+        private const float BRUSH_RETURN_DURATION_SEC = 0.2f;
 
         private Vector2 BrushImagePosition;
         private UIMovableTool BrushMove;
@@ -28,6 +30,13 @@ namespace DollMakeup.UI
         {
             BrushImagePosition = BrushImage.transform.position;
             BrushMove = GetComponent<UIMovableTool>();
+            
+            EventEmitter.EyeBrushApplyComplete += OnEyeBrushApplyComplete;
+        }
+
+        private void OnDestroy()
+        {
+            EventEmitter.EyeBrushApplyComplete -= OnEyeBrushApplyComplete;
         }
 
         public void BrushActivate(Vector3 colorPosition, int index)
@@ -113,6 +122,23 @@ namespace DollMakeup.UI
             var position = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position);
             Debug.Log("OnPointerUp position = " + position);
             AppModel.Instance.OnEyeBrushEndDrag(position, ActiveBrushIndex);
+        }
+        
+        private void OnEyeBrushApplyComplete()
+        {
+            Debug.Log("OnEyeBrushApplyComplete");
+            
+            brushAnimation = DOTween.Sequence();
+            brushAnimation.OnKill(() => brushAnimation = null);
+            
+            brushAnimation.Append(BrushTool.transform.DOMove(BrushImagePosition, BRUSH_RETURN_DURATION_SEC));
+            brushAnimation.Join(BrushTool.transform.DORotate(new Vector3(0, 0, 0), BRUSH_RETURN_DURATION_SEC));
+            brushAnimation.OnComplete(() =>
+            {
+                BrushImage.enabled = true;
+
+                BrushTool.SetActive(false);
+            });
         }
     }
 }
