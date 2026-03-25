@@ -29,5 +29,10 @@ namespace DollMakeup
         {
             GameModel.Instance.GameController.DollController.OnBlushBrushEndDrag(position, activeBrushIndex);
         }
+        
+        public void OnLipstickEndDrag(Vector2 position, int activeBrushIndex)
+        {
+            GameModel.Instance.GameController.DollController.OnLipstickEndDrag(position, activeBrushIndex);
+        }
     }
 }
