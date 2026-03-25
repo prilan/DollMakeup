@@ -6,7 +6,7 @@ namespace DollMakeup.UI.ToolBook
 {
     public class ColorPick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
-        [SerializeField] private EyeBrush Brush;
+        [SerializeField] private Brush Brush;
         
         public Action OnColorPick = () => { };
 
