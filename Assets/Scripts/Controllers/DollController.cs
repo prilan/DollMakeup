@@ -23,11 +23,7 @@ namespace DollMakeup.Controllers
         {
             Debug.Log("FacePosition = " + FacePosition);
             
-            if (!IsCreamApplied
-                &&position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 4
-                && position.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
-                && position.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
-                && position.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)
+            if (!IsCreamApplied && IsOnFace(position))
             {
                 CreamApplied();
             }
@@ -47,10 +43,7 @@ namespace DollMakeup.Controllers
             Debug.Log("FacePosition = " + FacePosition);
             Debug.Log("position = " + position + ", activeBrushIndex = " + activeBrushIndex);
             
-            if (position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 4
-                && position.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
-                && position.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
-                && position.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)
+            if (IsOnFace(position))
             {
                 EyeBrushApplied(activeBrushIndex);
             }
@@ -116,6 +109,14 @@ namespace DollMakeup.Controllers
 
             transform.DOMove(transform.position, EYE_BRUSH_APPLY_DURATION_SEC)
                 .OnComplete(EventEmitter.OnEyeBrushApplyComplete);
+        }
+        
+        private bool IsOnFace(Vector2 position)
+        {
+            return position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 4
+                   && position.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
+                   && position.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
+                   && position.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2;
         }
     }
 }
