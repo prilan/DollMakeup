@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace DollMakeup.UI
 {
-    public class EyeBrush : Brush
+    public class BlushBrush : Brush /*MonoBehaviour, IPointerDownHandler, IPointerUpHandler*/
     {
         /*[SerializeField] private Image BrushImage;
         [SerializeField] private GameObject BrushTool;

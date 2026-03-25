@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace DollMakeup.UI.ToolBook.Pages
 {
-    public class BrushPage : MonoBehaviour
+    public class BlushPage : MonoBehaviour // TODO
     {
         [SerializeField] private List<Button> ColorButtons;
         [SerializeField] private List<ColorPick> ColorPicks;

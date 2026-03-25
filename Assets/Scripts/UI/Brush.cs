@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace DollMakeup.UI
 {
-    public class EyeBrush : Brush
+    public class Brush : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        /*[SerializeField] private Image BrushImage;
+        [SerializeField] private Image BrushImage;
         [SerializeField] private GameObject BrushTool;
         
         private const float BRUSH_LENGTH = 220;
@@ -172,6 +172,6 @@ namespace DollMakeup.UI
 
                 BrushTool.SetActive(false);
             });
-        }*/
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace DollMakeup.Controllers
         [SerializeField] public SpriteRenderer FaceCleanSprite;
 
         [SerializeField] public List<EyeBrushSprites> EyeBrushList;
+        [SerializeField] public List<SpriteRenderer> BlushSprites;
 
         private const float CREAM_APPLY_DURATION_SEC = 0.3f;
         private const float EYE_BRUSH_APPLY_DURATION_SEC = 1.0f;
