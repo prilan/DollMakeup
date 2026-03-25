@@ -14,8 +14,13 @@ namespace DollMakeup.Controllers
         [SerializeField] public List<SpriteRenderer> BlushSprites;
 
         private const float CREAM_APPLY_DURATION_SEC = 0.3f;
+        
         private const float EYE_BRUSH_APPLY_DURATION_SEC = 1.0f;
         private const float EYE_BRUSH_END_DELAY_SEC = 0.4f;
+        
+        private const float BLUSH_BRUSH_APPLY_DURATION_SEC = 1.0f;
+        private const float BLUSH_BRUSH_END_DELAY_SEC = 0.4f;
+
 
         public Vector2 FacePosition => FaceSprite.transform.position;
 
@@ -52,6 +57,21 @@ namespace DollMakeup.Controllers
             else
             {
                 EventEmitter.OnEyeBrushApplyComplete();
+            }
+        }
+
+        public void OnBlushBrushEndDrag(Vector2 position, int activeBrushIndex)
+        {
+            Debug.Log("FacePosition = " + FacePosition);
+            Debug.Log("position = " + position + ", activeBrushIndex = " + activeBrushIndex);
+            
+            if (IsOnFace(position))
+            {
+                BlushBrushApplied(activeBrushIndex);
+            }
+            else
+            {
+                EventEmitter.OnBlushBrushApplyComplete();
             }
         }
 
@@ -120,6 +140,39 @@ namespace DollMakeup.Controllers
 
             transform.DOMove(transform.position, EYE_BRUSH_APPLY_DURATION_SEC + EYE_BRUSH_END_DELAY_SEC)
                 .OnComplete(EventEmitter.OnEyeBrushApplyComplete);
+        }
+        
+        private void BlushBrushApplied(int activeBrushIndex)
+        {
+            BlushBrushApplyAnimation(activeBrushIndex);
+        }
+
+        private void BlushBrushApplyAnimation(int activeBrushIndex)
+        {
+            for (var i = 0; i < BlushSprites.Count; i++)
+            {
+                if (i == activeBrushIndex)
+                {
+                    BlushSprites[i].gameObject.SetActive(true);
+
+                    BlushSprites[i].DOFade(0, 0);
+                    BlushSprites[i].DOFade(1, BLUSH_BRUSH_APPLY_DURATION_SEC);
+                }
+                else
+                {
+                    if (BlushSprites[i].gameObject.activeSelf)
+                    {
+                        var index = i;
+                        BlushSprites[i].DOFade(0, BLUSH_BRUSH_APPLY_DURATION_SEC).OnComplete(() =>
+                        {
+                            BlushSprites[index].gameObject.SetActive(false);
+                        });
+                    }
+                }
+            }
+
+            transform.DOMove(transform.position, BLUSH_BRUSH_APPLY_DURATION_SEC + BLUSH_BRUSH_END_DELAY_SEC)
+                .OnComplete(EventEmitter.OnBlushBrushApplyComplete);
         }
         
         private bool IsOnFace(Vector2 position)

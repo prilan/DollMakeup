@@ -16,11 +16,12 @@ namespace DollMakeup.UI
         private const float BRUSH_ACTIVATE_MOVE_DURATION_SEC = 0.4f;
         private const float BRUSH_IN_COLOR_SHIFT = 30;
         
-        private const float FACE_EYE_ADD_LENGTH = 220;
-        private const float BRUSH_APPLY_SHIFT = 120;
         private const float BRUSH_APPLY_START_MOVE_DURATION_SEC = 0.15f;
         private const float BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC = 0.2f;
         private const float BRUSH_RETURN_DURATION_SEC = 0.2f;
+
+        protected float FaceBrushTargetAddLength;
+        protected float BrushApplyShift;
 
         private Vector2 BrushImagePosition;
         private UIMovableTool BrushMove;
@@ -29,17 +30,30 @@ namespace DollMakeup.UI
         private Sequence brushAnimation;
         private bool IsMovable;
 
+        protected virtual void Initialize()
+        {
+        }
+        
+        protected virtual void AddListeners()
+        {
+        }
+        
+        protected virtual void RemoveListeners()
+        {
+        }
+        
         private void Start()
         {
             BrushImagePosition = BrushImage.transform.position;
             BrushMove = GetComponent<UIMovableTool>();
-            
-            EventEmitter.EyeBrushApplyComplete += OnEyeBrushApplyComplete;
+
+            Initialize();
+            AddListeners();
         }
 
         private void OnDestroy()
         {
-            EventEmitter.EyeBrushApplyComplete -= OnEyeBrushApplyComplete;
+            RemoveListeners();
         }
 
         public void BrushActivate(Vector3 colorPosition, int index)
@@ -104,8 +118,6 @@ namespace DollMakeup.UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            //Debug.Log("EyeBrush OnDrag, IsMovable = " + IsMovable);
-
             if (!IsMovable)
                 return;
             
@@ -123,12 +135,17 @@ namespace DollMakeup.UI
             BrushMove.EndDrag();
             var position = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position);
             Debug.Log("OnPointerUp position = " + position);
-            AppModel.Instance.OnEyeBrushEndDrag(position, ActiveBrushIndex);
 
-            EyeBrushApplyAnimation();
+            OnBrushEndDrag(position, ActiveBrushIndex);
+
+            BrushApplyAnimation();
         }
 
-        private void EyeBrushApplyAnimation()
+        protected virtual void OnBrushEndDrag(Vector2 position, int activeBrushIndex)
+        {
+        }
+
+        private void BrushApplyAnimation()
         {
             brushAnimation = DOTween.Sequence();
             brushAnimation.OnKill(() => brushAnimation = null);
@@ -136,15 +153,15 @@ namespace DollMakeup.UI
             Vector3 facePosition = WorldToCanvasPosition(AppModel.Instance.FacePosition, AppModel.Instance.Canvas);
             Debug.Log("facePosition = " + facePosition);
             
-            var targetPosition = facePosition - new Vector3(0, FACE_EYE_ADD_LENGTH, 0);
+            var targetPosition = facePosition - new Vector3(0, FaceBrushTargetAddLength, 0);
 
             brushAnimation.Append(BrushTool.transform.DOMove(targetPosition, BRUSH_APPLY_START_MOVE_DURATION_SEC));
 
-            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BRUSH_APPLY_SHIFT, 0, 0),  BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
-            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(-BRUSH_APPLY_SHIFT, 0, 0), BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
-            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BRUSH_APPLY_SHIFT, 0, 0),  BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
-            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(-BRUSH_APPLY_SHIFT, 0, 0), BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
-            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BRUSH_APPLY_SHIFT, 0, 0),  BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BrushApplyShift, 0, 0),  BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(-BrushApplyShift, 0, 0), BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BrushApplyShift, 0, 0),  BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(-BrushApplyShift, 0, 0), BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
+            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BrushApplyShift, 0, 0),  BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.OutSine));
 
             brushAnimation.Append(BrushTool.transform.DOMove(targetPosition, BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC).SetEase(Ease.InOutSine));
 
@@ -154,9 +171,9 @@ namespace DollMakeup.UI
             });
         }
         
-        private void OnEyeBrushApplyComplete()
+        protected void OnBrushApplyComplete()
         {
-            Debug.Log("OnEyeBrushApplyComplete");
+            Debug.Log("OnBrushApplyComplete");
             
             brushAnimation.Complete();
             brushAnimation.Kill();
