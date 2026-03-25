@@ -7853,11 +7853,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 822143755898852406, guid: 326812513b4e6184e8cac68e9f57c925, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1712489912412162999, guid: 326812513b4e6184e8cac68e9f57c925, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3504797701863737507, guid: 326812513b4e6184e8cac68e9f57c925, type: 3}
       propertyPath: m_LocalPosition.x
