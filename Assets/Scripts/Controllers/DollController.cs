@@ -47,17 +47,17 @@ namespace DollMakeup.Controllers
             Debug.Log("FacePosition = " + FacePosition);
             Debug.Log("position = " + position + ", activeBrushIndex = " + activeBrushIndex);
             
-            /*if (/*!IsCreamApplied
-                &&#1#position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 4
+            if (/*!IsCreamApplied
+                &&*/position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 4
                 && position.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
                 && position.y > FaceSprite.transform.position.y - FaceSprite.size.y / 2
-                && position.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)*/
+                && position.y < FaceSprite.transform.position.y + FaceSprite.size.y / 2)
             {
                 EyeBrushApplied(activeBrushIndex);
             }
-            //else
+            else
             {
-                //EventEmitter.OnCreamApplyComplete();
+                EventEmitter.OnEyeBrushApplyComplete();
             }
         }
 
@@ -98,16 +98,9 @@ namespace DollMakeup.Controllers
                 brushSprite.DOFade(0, 0);
                 brushSprite.DOFade(1, EYE_BRUSH_APPLY_DURATION_SEC);
             }
-            
-            foreach (var brushSprite in EyeBrushList[activeBrushIndex].BrushSprites)
-            {
-                /*DOTween.
-                brushSprite.DOFade().OnComplete(() =>
-                {
-                    EventEmitter.OnCreamApplyComplete();
-                    IsCreamApplied = true;
-                });*/
-            }
+
+            transform.DOMove(transform.position, EYE_BRUSH_APPLY_DURATION_SEC)
+                .OnComplete(EventEmitter.OnEyeBrushApplyComplete);
         }
     }
 }
