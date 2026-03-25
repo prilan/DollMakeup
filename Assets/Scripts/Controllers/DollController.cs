@@ -105,6 +105,12 @@ namespace DollMakeup.Controllers
                     brushSprite.gameObject.SetActive(false);
                 }
             }
+            
+            foreach (var brushSprite in BlushSprites)
+            {
+                brushSprite.DOFade(0, 0);
+                brushSprite.gameObject.SetActive(false);
+            }
         }
         
         private void EyeBrushApplied(int activeBrushIndex)
