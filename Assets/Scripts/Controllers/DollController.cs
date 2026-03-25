@@ -75,6 +75,15 @@ namespace DollMakeup.Controllers
         {
             FaceCleanSprite.gameObject.SetActive(false);
             IsCreamApplied = false;
+            
+            foreach (var brushSprites in EyeBrushList)
+            {
+                foreach (var brushSprite in brushSprites.BrushSprites)
+                {
+                    brushSprite.DOFade(0, 0);
+                    brushSprite.gameObject.SetActive(false);
+                }
+            }
         }
         
         private void EyeBrushApplied(int activeBrushIndex)
