@@ -12,6 +12,7 @@ namespace DollMakeup.Controllers
 
         [SerializeField] public List<EyeBrushSprites> EyeBrushList;
         [SerializeField] public List<SpriteRenderer> BlushSprites;
+        [SerializeField] public List<SpriteRenderer> LipstickSprites;
 
         private const float CREAM_APPLY_DURATION_SEC = 0.3f;
         
@@ -74,6 +75,21 @@ namespace DollMakeup.Controllers
                 EventEmitter.OnBlushBrushApplyComplete();
             }
         }
+        
+        public void OnLipstickEndDrag(Vector2 position, int activeBrushIndex)
+        {
+            Debug.Log("FacePosition = " + FacePosition);
+            Debug.Log("position = " + position + ", activeBrushIndex = " + activeBrushIndex);
+            
+            if (IsOnFace(position))
+            {
+                LipstickApplied(activeBrushIndex);
+            }
+            else
+            {
+                EventEmitter.OnLipstickApplyComplete();
+            }
+        }
 
         private void CreamApplied()
         {
@@ -110,6 +126,12 @@ namespace DollMakeup.Controllers
             {
                 brushSprite.DOFade(0, 0);
                 brushSprite.gameObject.SetActive(false);
+            }
+            
+            foreach (var lipstickSprite in LipstickSprites)
+            {
+                lipstickSprite.DOFade(0, 0);
+                lipstickSprite.gameObject.SetActive(false);
             }
         }
         
@@ -179,6 +201,39 @@ namespace DollMakeup.Controllers
 
             transform.DOMove(transform.position, BLUSH_BRUSH_APPLY_DURATION_SEC + BLUSH_BRUSH_END_DELAY_SEC)
                 .OnComplete(EventEmitter.OnBlushBrushApplyComplete);
+        }
+        
+        private void LipstickApplied(int activeBrushIndex)
+        {
+            LipstickApplyAnimation(activeBrushIndex);
+        }
+
+        private void LipstickApplyAnimation(int activeBrushIndex)
+        {
+            for (var i = 0; i < LipstickSprites.Count; i++)
+            {
+                if (i == activeBrushIndex)
+                {
+                    LipstickSprites[i].gameObject.SetActive(true);
+
+                    LipstickSprites[i].DOFade(0, 0);
+                    LipstickSprites[i].DOFade(1, BLUSH_BRUSH_APPLY_DURATION_SEC);
+                }
+                else
+                {
+                    if (LipstickSprites[i].gameObject.activeSelf)
+                    {
+                        var index = i;
+                        LipstickSprites[i].DOFade(0, BLUSH_BRUSH_APPLY_DURATION_SEC).OnComplete(() =>
+                        {
+                            LipstickSprites[index].gameObject.SetActive(false);
+                        });
+                    }
+                }
+            }
+
+            transform.DOMove(transform.position, BLUSH_BRUSH_APPLY_DURATION_SEC + BLUSH_BRUSH_END_DELAY_SEC) // TODO
+                .OnComplete(EventEmitter.OnLipstickApplyComplete);
         }
         
         private bool IsOnFace(Vector2 position)

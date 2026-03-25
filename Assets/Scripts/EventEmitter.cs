@@ -8,6 +8,7 @@ namespace DollMakeup
         private event Action creamApplyComplete = () => { };
         private event Action eyeBrushApplyComplete = () => { };
         private event Action blushBrushApplyComplete = () => { };
+        private event Action lipstickApplyComplete = () => { };
 
         /*****************************************************************************************/
         
@@ -24,6 +25,11 @@ namespace DollMakeup
         public static void OnBlushBrushApplyComplete()
         {
             Instance.blushBrushApplyComplete();
+        }
+        
+        public static void OnLipstickApplyComplete()
+        {
+            Instance.lipstickApplyComplete();
         }
         
         /*****************************************************************************************/
@@ -44,6 +50,12 @@ namespace DollMakeup
         {
             add => Instance.blushBrushApplyComplete += value;
             remove => Instance.blushBrushApplyComplete -= value;
+        }
+        
+        public static event Action LipstickApplyComplete
+        {
+            add => Instance.lipstickApplyComplete += value;
+            remove => Instance.lipstickApplyComplete -= value;
         }
     }
 }
