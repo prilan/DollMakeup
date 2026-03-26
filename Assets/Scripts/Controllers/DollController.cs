@@ -223,8 +223,8 @@ namespace DollMakeup.Controllers
             transform.DOMove(transform.position, BLUSH_BRUSH_APPLY_DURATION_SEC + BLUSH_BRUSH_END_DELAY_SEC) // TODO
                 .OnComplete(EventEmitter.OnLipstickApplyComplete);
         }
-        
-        private bool IsOnFace(Vector2 position)
+
+        public bool IsOnFace(Vector2 position)
         {
             return position.x > FaceSprite.transform.position.x - FaceSprite.size.x / 4
                    && position.x < FaceSprite.transform.position.x + FaceSprite.size.x / 2
