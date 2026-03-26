@@ -18,6 +18,8 @@ namespace DollMakeup.UI.Tool
         protected float FaceBrushTargetAddLength;
         protected float BrushApplyShift;
 
+        protected float ScaleCoefficient;
+
         private Vector2 BrushImagePosition;
         private UIMovableTool BrushMove;
         protected int ActiveBrushIndex;
@@ -39,6 +41,7 @@ namespace DollMakeup.UI.Tool
         
         private void Start()
         {
+            ScaleCoefficient = AppModel.Instance.Canvas.scaleFactor;
             BrushImagePosition = BrushImage.transform.position;
             BrushMove = GetComponent<UIMovableTool>();
 
@@ -119,6 +122,7 @@ namespace DollMakeup.UI.Tool
             Vector3 facePosition = WorldToCanvasPosition(AppModel.Instance.FacePosition, AppModel.Instance.Canvas);
             
             var targetPosition = facePosition - new Vector3(0, FaceBrushTargetAddLength, 0);
+            targetPosition *= ScaleCoefficient;
 
             brushAnimation.Append(BrushTool.transform.DOMove(targetPosition, BRUSH_APPLY_START_MOVE_DURATION_SEC));
 

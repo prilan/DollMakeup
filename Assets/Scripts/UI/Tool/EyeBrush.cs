@@ -12,7 +12,7 @@ namespace DollMakeup.UI.Tool
             base.Initialize();
 
             FaceBrushTargetAddLength = FACE_EYE_ADD_LENGTH;
-            BrushApplyShift = EYE_BRUSH_APPLY_SHIFT;
+            BrushApplyShift = EYE_BRUSH_APPLY_SHIFT * ScaleCoefficient;
         }
 
         protected override void AddListeners()
