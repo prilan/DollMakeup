@@ -5015,7 +5015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2498bc8df41a4220906c4af7cf03981a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.Brush
-  BrushImage: {fileID: 793005953}
   BrushTool: {fileID: 1882333109}
 --- !u!1 &808567815
 GameObject:
@@ -6955,7 +6954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e7106f86fb4b2fa89078b1fbe908aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DollMakeup.UI.EyeBrush
-  BrushImage: {fileID: 1207711781}
   BrushTool: {fileID: 45706949}
 --- !u!114 &1207711785
 MonoBehaviour:

@@ -1,65 +1,40 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using DollMakeup.Tools;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace DollMakeup.UI
+namespace DollMakeup.UI.Tool
 {
-    public class Lipstick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+    public class Tool : MonoBehaviour, IPointerUpHandler
     {
+        [SerializeField] protected GameObject BrushTool;
         private Image BrushImage => gameObject.GetComponent<Image>();
-        [SerializeField] private GameObject BrushTool;
-        
-        private const float BRUSH_LENGTH = 220;
-        private const float BRUSH_TARGET_SHIFT = 50;
-        private const float BRUSH_ACTIVATE_MOVE_DURATION_SEC = 0.4f;
-        private const float BRUSH_IN_COLOR_SHIFT = 30;
         
         private const float BRUSH_APPLY_START_MOVE_DURATION_SEC = 0.15f;
         private const float BRUSH_APPLY_MOVE_ONE_SIDE_DURATION_SEC = 0.2f;
         private const float BRUSH_RETURN_DURATION_SEC = 0.2f;
 
-        private const float FACE_LIPSTICK_ADD_LENGTH = 255;
-        private const float LIPSTICK_APPLY_SHIFT = 30;
-        
-        public Action OnColorPick = () => { };
-        
         protected float FaceBrushTargetAddLength;
         protected float BrushApplyShift;
 
-        private int LipstickIndex;
-        
         private Vector2 BrushImagePosition;
         private UIMovableTool BrushMove;
-        private int ActiveBrushIndex = -1;
+        protected int ActiveBrushIndex;
         
-        private Sequence brushAnimation;
-        private bool IsMovable;
-
-        public void InitIndex(int index)
-        {
-            LipstickIndex = index;
-        }
+        protected Sequence brushAnimation;
+        protected bool IsMovable;
 
         protected virtual void Initialize()
         {
-            
-            FaceBrushTargetAddLength = FACE_LIPSTICK_ADD_LENGTH;
-            BrushApplyShift = LIPSTICK_APPLY_SHIFT;
         }
         
         protected virtual void AddListeners()
         {
-            
-            EventEmitter.LipstickApplyComplete += OnBrushApplyComplete;
         }
         
         protected virtual void RemoveListeners()
         {
-            
-            EventEmitter.LipstickApplyComplete -= OnBrushApplyComplete;
         }
         
         private void Start()
@@ -76,11 +51,6 @@ namespace DollMakeup.UI
             RemoveListeners();
         }
 
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            OnColorPick?.Invoke();
-        }
-        
         public void BrushActivate(Vector3 colorPosition, int index)
         {
             ActiveBrushIndex = index;
@@ -99,37 +69,11 @@ namespace DollMakeup.UI
             BrushTool.transform.eulerAngles = Vector3.zero;
         }
         
-        private void StartBrushAnimation(Vector3 colorPosition)
+        protected virtual void StartBrushAnimation(Vector3 colorPosition)
         {
-            Debug.Log("colorPosition = " + colorPosition);
-
-            brushAnimation = DOTween.Sequence();
-            brushAnimation.OnKill(() => brushAnimation = null);
-
-            //var targetPosition = colorPosition + new Vector3(BRUSH_TARGET_SHIFT, -BRUSH_LENGTH, 0);
-
-            Vector3 facePosition = WorldToCanvasPosition(AppModel.Instance.FacePosition, AppModel.Instance.Canvas);
-            Debug.Log("facePosition = " + facePosition);
-            var centerPosition = colorPosition + (facePosition - colorPosition) / 4;
-            Debug.Log("centerPosition = " + centerPosition);
-
-            /*brushAnimation.Append(BrushTool.transform.DOMove(targetPosition, BRUSH_ACTIVATE_MOVE_DURATION_SEC));
-            brushAnimation.Join(BrushTool.transform.DORotate(new Vector3(0, 0, 15), BRUSH_ACTIVATE_MOVE_DURATION_SEC));
-
-            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BRUSH_IN_COLOR_SHIFT, 0, 0), 0.15f).SetEase(Ease.OutSine));
-            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(-BRUSH_IN_COLOR_SHIFT, 0, 0), 0.2f).SetEase(Ease.OutSine));
-            brushAnimation.Append(BrushTool.transform.DOMove(targetPosition + new Vector3(BRUSH_IN_COLOR_SHIFT, 0, 0), 0.2f).SetEase(Ease.OutSine));*/
-
-            brushAnimation.Append(BrushTool.transform.DOMove(centerPosition, 0.5f).SetEase(Ease.InOutSine));
-            brushAnimation.Join(BrushTool.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-
-            brushAnimation.OnComplete(() =>
-            {
-                IsMovable = true;
-            });
         }
 
-        private Vector2 WorldToCanvasPosition(Vector2 position, Canvas canvas)
+        protected Vector2 WorldToCanvasPosition(Vector2 position, Canvas canvas)
         {
             Vector2 ViewPos = AppModel.Instance.Camera.WorldToViewportPoint(position);
             var CanvasSize = canvas.gameObject.GetComponent<RectTransform>().sizeDelta;
@@ -163,8 +107,6 @@ namespace DollMakeup.UI
 
         protected virtual void OnBrushEndDrag(Vector2 position, int activeBrushIndex)
         {
-            
-            AppModel.Instance.OnLipstickEndDrag(position, activeBrushIndex);
         }
 
         private void BrushApplyAnimation()
@@ -197,7 +139,7 @@ namespace DollMakeup.UI
         {
             Debug.Log("OnBrushApplyComplete");
             
-            if (LipstickIndex != ActiveBrushIndex)
+            if (IsNeedBreakInBrushApplyComplete())
                 return;
             
             brushAnimation.Complete();
@@ -213,10 +155,18 @@ namespace DollMakeup.UI
                 BrushImage.enabled = true;
 
                 BrushTool.SetActive(false);
-                //transform.position = BrushImagePosition;
 
-                ActiveBrushIndex = -1;
+                OnBrushApplyCompleteFinalActions();
             });
+        }
+
+        protected virtual bool IsNeedBreakInBrushApplyComplete()
+        {
+            return false;
+        }
+
+        protected virtual void OnBrushApplyCompleteFinalActions()
+        {
         }
     }
 }

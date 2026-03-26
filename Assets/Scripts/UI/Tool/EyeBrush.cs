@@ -1,39 +1,39 @@
 ﻿using UnityEngine;
 
-namespace DollMakeup.UI
+namespace DollMakeup.UI.Tool
 {
-    public class BlushBrush : Brush
+    public class EyeBrush : Brush
     {
-        private const float FACE_BLUSH_ADD_LENGTH = 300;
-        private const float BLUSH_BRUSH_APPLY_SHIFT = 80;
+        private const float FACE_EYE_ADD_LENGTH = 220;
+        private const float EYE_BRUSH_APPLY_SHIFT = 120;
 
         protected override void Initialize()
         {
             base.Initialize();
 
-            FaceBrushTargetAddLength = FACE_BLUSH_ADD_LENGTH;
-            BrushApplyShift = BLUSH_BRUSH_APPLY_SHIFT;
+            FaceBrushTargetAddLength = FACE_EYE_ADD_LENGTH;
+            BrushApplyShift = EYE_BRUSH_APPLY_SHIFT;
         }
-        
+
         protected override void AddListeners()
         {
             base.AddListeners();
             
-            EventEmitter.BlushBrushApplyComplete += OnBrushApplyComplete;
+            EventEmitter.EyeBrushApplyComplete += OnBrushApplyComplete;
         }
 
         protected override void RemoveListeners()
         {
             base.RemoveListeners();
             
-            EventEmitter.BlushBrushApplyComplete -= OnBrushApplyComplete;
+            EventEmitter.EyeBrushApplyComplete -= OnBrushApplyComplete;
         }
-        
+
         protected override void OnBrushEndDrag(Vector2 position, int activeBrushIndex)
         {
             base.OnBrushEndDrag(position, activeBrushIndex);
-
-            AppModel.Instance.OnBlushBrushEndDrag(position, activeBrushIndex);
+            
+            AppModel.Instance.OnEyeBrushEndDrag(position, activeBrushIndex);
         }
     }
 }
