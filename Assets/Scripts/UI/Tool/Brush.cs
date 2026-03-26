@@ -36,6 +36,8 @@ namespace DollMakeup.UI.Tool
             brushAnimation.OnComplete(() =>
             {
                 IsMovable = true;
+                
+                BrushTool.transform.DOMove(Input.mousePosition, 0.2f).SetEase(Ease.InOutSine);
             });
         }
     }
