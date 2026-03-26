@@ -1670,7 +1670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2460248190930681085, guid: 407550d6ceca1e04e97b9869ddd7dd88, type: 3}
+  m_Sprite: {fileID: 477915903493402997, guid: 55fdee4d01d524f4180b5addf73215d9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5875,7 +5875,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5084321686398463905, guid: 6b02cf8d98e150d49aa8de6fdcaae704, type: 3}
+  m_Sprite: {fileID: -2882974768894518874, guid: f0238e6d799936942a6feac34a2a72e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7728,7 +7728,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2882974768894518874, guid: f0238e6d799936942a6feac34a2a72e3, type: 3}
+  m_Sprite: {fileID: 5084321686398463905, guid: 6b02cf8d98e150d49aa8de6fdcaae704, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8900,7 +8900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 477915903493402997, guid: 55fdee4d01d524f4180b5addf73215d9, type: 3}
+  m_Sprite: {fileID: -2460248190930681085, guid: 407550d6ceca1e04e97b9869ddd7dd88, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10286,7 +10286,7 @@ GameObject:
   - component: {fileID: 1773624696}
   - component: {fileID: 1773624697}
   m_Layer: 5
-  m_Name: Tab1Powder
+  m_Name: Tab1EyeBrush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11393,7 +11393,7 @@ GameObject:
   - component: {fileID: 1883685910}
   - component: {fileID: 1883685909}
   m_Layer: 5
-  m_Name: Tab4Eyeshadow
+  m_Name: Tab4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
