@@ -51,15 +51,11 @@ namespace DollMakeup.UI.Tool
         {
             base.StartBrushAnimation(colorPosition);
             
-            Debug.Log("colorPosition = " + colorPosition);
-
             brushAnimation = DOTween.Sequence();
             brushAnimation.OnKill(() => brushAnimation = null);
 
             Vector3 facePosition = WorldToCanvasPosition(AppModel.Instance.FacePosition, AppModel.Instance.Canvas);
-            Debug.Log("facePosition = " + facePosition);
             var centerPosition = colorPosition + (facePosition - colorPosition) / 4;
-            Debug.Log("centerPosition = " + centerPosition);
 
             brushAnimation.Append(BrushTool.transform.DOMove(centerPosition, 0.5f).SetEase(Ease.InOutSine));
             brushAnimation.Join(BrushTool.transform.DORotate(new Vector3(0, 0, 0), 0.5f));

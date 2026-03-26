@@ -22,15 +22,12 @@ namespace DollMakeup.Controllers
         private const float BLUSH_BRUSH_APPLY_DURATION_SEC = 1.0f;
         private const float BLUSH_BRUSH_END_DELAY_SEC = 0.4f;
 
-
         public Vector2 FacePosition => FaceSprite.transform.position;
 
         private bool IsCreamApplied;
 
         public void OnCreamEndDrag(Vector2 position)
         {
-            Debug.Log("FacePosition = " + FacePosition);
-            
             if (!IsCreamApplied && IsOnFace(position))
             {
                 CreamApplied();
@@ -48,9 +45,6 @@ namespace DollMakeup.Controllers
 
         public void OnEyeBrushEndDrag(Vector2 position, int activeBrushIndex)
         {
-            Debug.Log("FacePosition = " + FacePosition);
-            Debug.Log("position = " + position + ", activeBrushIndex = " + activeBrushIndex);
-            
             if (IsOnFace(position))
             {
                 EyeBrushApplied(activeBrushIndex);
@@ -63,9 +57,6 @@ namespace DollMakeup.Controllers
 
         public void OnBlushBrushEndDrag(Vector2 position, int activeBrushIndex)
         {
-            Debug.Log("FacePosition = " + FacePosition);
-            Debug.Log("position = " + position + ", activeBrushIndex = " + activeBrushIndex);
-            
             if (IsOnFace(position))
             {
                 BlushBrushApplied(activeBrushIndex);
@@ -78,9 +69,6 @@ namespace DollMakeup.Controllers
         
         public void OnLipstickEndDrag(Vector2 position, int activeBrushIndex)
         {
-            Debug.Log("FacePosition = " + FacePosition);
-            Debug.Log("position = " + position + ", activeBrushIndex = " + activeBrushIndex);
-            
             if (IsOnFace(position))
             {
                 LipstickApplied(activeBrushIndex);

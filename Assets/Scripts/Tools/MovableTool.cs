@@ -12,8 +12,6 @@ namespace DollMakeup.Tools
 
         public void StartDrag(GameObject spriteToMove, bool isUI, Vector2 positionDelta = new Vector2())
         {
-            Debug.Log("StartDrag positionDelta = " + positionDelta);
-
             IsUI = isUI;
             IsOn = true;
             SpriteToMove = spriteToMove;
@@ -22,8 +20,6 @@ namespace DollMakeup.Tools
 
         public void EndDrag()
         {
-            Debug.Log("EndDrag");
-            
             IsOn = false;
             SpriteToMove = null;
         }

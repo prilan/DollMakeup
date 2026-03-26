@@ -70,7 +70,6 @@ namespace DollMakeup.UI
         {
             var clickDelta = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position) -
                              CreamImageWorldPosition;
-            Debug.Log("OnPointerDown clickDelta = " + clickDelta);
             CreamMove.StartDrag(CreamTool, false, PositionDelta - clickDelta);
         }
 
@@ -78,7 +77,6 @@ namespace DollMakeup.UI
         {
             CreamMove.EndDrag();
             var position = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position) + PositionDelta;
-            Debug.Log("OnPointerUp position = " + position);
             AppModel.Instance.OnCreamEndDrag(position);
         }
         
