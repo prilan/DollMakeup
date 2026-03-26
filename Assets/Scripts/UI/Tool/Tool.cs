@@ -98,7 +98,6 @@ namespace DollMakeup.UI.Tool
         {
             BrushMove.EndDrag();
             var position = (Vector2) AppModel.Instance.Camera.ScreenToWorldPoint(eventData.position);
-            Debug.Log("OnPointerUp position = " + position);
 
             OnBrushEndDrag(position, ActiveBrushIndex);
 
@@ -115,7 +114,6 @@ namespace DollMakeup.UI.Tool
             brushAnimation.OnKill(() => brushAnimation = null);
 
             Vector3 facePosition = WorldToCanvasPosition(AppModel.Instance.FacePosition, AppModel.Instance.Canvas);
-            Debug.Log("facePosition = " + facePosition);
             
             var targetPosition = facePosition - new Vector3(0, FaceBrushTargetAddLength, 0);
 
@@ -137,8 +135,6 @@ namespace DollMakeup.UI.Tool
         
         protected void OnBrushApplyComplete()
         {
-            Debug.Log("OnBrushApplyComplete");
-            
             if (IsNeedBreakInBrushApplyComplete())
                 return;
             

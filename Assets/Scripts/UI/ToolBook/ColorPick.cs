@@ -18,8 +18,6 @@ namespace DollMakeup.UI.ToolBook
 
         public void OnDrag(PointerEventData eventData)
         {
-            //Debug.Log("ColorPick OnDrag");
-            
             Brush.OnDrag(eventData);
         }
 
