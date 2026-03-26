@@ -19,6 +19,11 @@ namespace DollMakeup
         {
             GameModel.Instance.GameController.DollController.OnSpongeClicked();
         }
+
+        public bool IsOnFace(Vector2 position)
+        {
+            return GameModel.Instance.GameController.DollController.IsOnFace(position);
+        }
         
         public void OnEyeBrushEndDrag(Vector2 position, int activeBrushIndex)
         {

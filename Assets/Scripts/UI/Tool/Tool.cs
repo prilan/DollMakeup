@@ -101,7 +101,10 @@ namespace DollMakeup.UI.Tool
 
             OnBrushEndDrag(position, ActiveBrushIndex);
 
-            BrushApplyAnimation();
+            if (AppModel.Instance.IsOnFace(position))
+            {
+                BrushApplyAnimation();
+            }
         }
 
         protected virtual void OnBrushEndDrag(Vector2 position, int activeBrushIndex)
